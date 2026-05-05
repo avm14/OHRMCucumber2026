@@ -1,0 +1,19 @@
+{
+	"Payroll Administrator":
+	{
+		"firstName":"Mythri",
+		"lastName":"Paithyo",
+		"email":"mmmm@gmail.com",
+		"role":"Payroll Administrator"
+	},
+	
+	"Senior QA Lead":
+	{
+		"firstName":"Manish",
+		"lastName":"Av",
+		"email":"avav@gmail.com",
+		"role":"Senior QA Lead"
+	}
+	
+	
+}
