@@ -45,17 +45,15 @@ public class OrangeHRMRecruitmentPage {
 	By scheduleInterviewBtn = By.xpath("//button[@class='oxd-button oxd-button--medium oxd-button--success']");
 	By interviewTitleTB = By.xpath("//label[text()='Interview Title']/parent::div/following-sibling::div/input");
 	By interviewerTB = By.xpath("//input[@placeholder = 'Type for hints...']");
-	By firstInterviewerFromList = By.xpath("//*[@role='listbox']/div[1]");
+	String firstInterviewerFromList = "//*[@role='listbox']/div[1]";
+	String interviewerSuggestionLoader = "//*[text()='Searching....']";
 	By interviewDateBox=By.xpath("//input[@placeholder='yyyy-dd-mm']");
 	By interviewTimeBox = By.xpath("//input[@placeholder='hh:mm']");
-	By interviewTimeHour = By.xpath("//div[@class='oxd-time-hour-input']/input");
-	By interviewTimeMinutes = By.xpath("//div[@class='oxd-time-minute-input']/input");
-	By interviewTimeAM=By.xpath("//input[@value='AM']");
-	By interviewTimePM=By.xpath("//input[@value='PM']");
 	By interviewPassBtn = By.xpath("//button[@class='oxd-button oxd-button--medium oxd-button--success']");
     By offerJobBtn = By.xpath("//button[text()=' Offer Job ']");
     By hireBtn = By.xpath("//button[text()=' Hire ']");
     By hiredStatusMsg = By.xpath("//*[text()='Status: Hired']");
+    By loadingSpinner = By.xpath("//*[@class='oxd-loading-spinner']");
 	
 	public void clickRecruitmentTab()
 	{
@@ -111,10 +109,10 @@ public class OrangeHRMRecruitmentPage {
 		
 	}
 	
-	public void clickOnActions(String candidateName) throws InterruptedException
+	public void clickOnActions(String candidateName, String candidateStatus) throws InterruptedException
 	{
 		TableUtils table = new TableUtils(driver);
-		table.clickUsingRowAndHeader(candidateRecordsTableHeader, "Actions",candidateRecordsTableRows, candidateName );
+		table.clickUsingMultipleRowKeysAndHeader(candidateRecordsTableHeader, "Actions",candidateRecordsTableRows, candidateName, candidateStatus);
 		
 	}
 	
@@ -151,12 +149,13 @@ public class OrangeHRMRecruitmentPage {
 	public void selectInterviewer() throws InterruptedException
 	{
 		driver.findElement(interviewerTB).clear();
+		driver.findElement(interviewerTB).click();
 		driver.findElement(interviewerTB).sendKeys("a");
-	
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-		wait.until(ExpectedConditions.visibilityOf(driver.findElement(firstInterviewerFromList)));
-		
-		driver.findElement(firstInterviewerFromList).click();
+		WebElement loader = driver.findElement(By.xpath(interviewerSuggestionLoader));
+		wait.until(ExpectedConditions.invisibilityOf(loader));
+		WebElement option = driver.findElement(By.xpath(firstInterviewerFromList));
+		option.click();
 	}
 	public void selectInterviewDate(String dateInput) throws InterruptedException
 	{
@@ -166,33 +165,42 @@ public class OrangeHRMRecruitmentPage {
 		
 	}
 	
+	//Another way of selecting time where the string is pharsed to split time elements
+//	public void selectInterviewTime(String time)
+//	{
+//		// Split AM/PM
+//	    String meridian = time.substring(time.length() - 2);
+//
+//	    // Remove AM/PM
+//	    String timePart = time.substring(0, time.length() - 2);
+//
+//	    // Split hour and minute
+//	    String[] parts = timePart.split(":");
+//
+//	    String hour = parts[0];
+//	    String minutes = parts[1];
+//	    
+//	    driver.findElement(interviewTimeHour).sendKeys(hour);
+//	    driver.findElement(interviewTimeMinutes).sendKeys(minutes);
+//	    
+//	    if(meridian=="AM") 
+//	    {
+//	    	driver.findElement(interviewTimeAM).click();
+//	    }
+//	    else if(meridian=="PM")
+//	    {
+//	    	driver.findElement(interviewTimePM).click();
+//	    }
+//	    
+//	    
+//	}
+	
 	public void selectInterviewTime(String time)
 	{
-		// Split AM/PM
-	    String meridian = time.substring(time.length() - 2);
-
-	    // Remove AM/PM
-	    String timePart = time.substring(0, time.length() - 2);
-
-	    // Split hour and minute
-	    String[] parts = timePart.split(":");
-
-	    String hour = parts[0];
-	    String minutes = parts[1];
-	    
-	    driver.findElement(interviewTimeHour).sendKeys(hour);
-	    driver.findElement(interviewTimeMinutes).sendKeys(minutes);
-	    
-	    if(meridian=="AM") 
-	    {
-	    	driver.findElement(interviewTimeAM).click();
-	    }
-	    else if(meridian=="PM")
-	    {
-	    	driver.findElement(interviewTimePM).click();
-	    }
-	    
-	    
+		driver.findElement(interviewTimeBox).click();
+		driver.findElement(interviewTimeBox).clear();
+		driver.findElement(interviewTimeBox).sendKeys(time);
+		
 	}
 	
 	public void clickInterviewPass()
@@ -202,6 +210,8 @@ public class OrangeHRMRecruitmentPage {
 	
 	public void clickOfferJob()
 	{
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(loadingSpinner));
 		driver.findElement(offerJobBtn).click();
 	}
 	public void clickHireBtn()
