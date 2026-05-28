@@ -69,6 +69,20 @@ public class TableUtils {
 		
 		throw new RuntimeException("Unique Value not found: " + uniqueValue);
 	}
+	public int getRowIndexUsingUniqueValueSet(By rowsLocator, String uniqueValue1, String uniqueValue2)
+	{
+		List<WebElement> rows = driver.findElements(rowsLocator);
+		for(int i=0;i<rows.size();i++)
+		{
+
+			if(rows.get(i).getText().contains(uniqueValue1) && rows.get(i).getText().contains(uniqueValue2))
+			{
+				return i;
+			}
+		}
+		
+		throw new RuntimeException("Unique Value not found: " + uniqueValue1 +" "+ uniqueValue2);
+	}
 	public void clickUsingRowAndHeader(By headerLocator, String columnName,By rowsLocator, String uniqueValue )
 	{
 		int columnID = getColumnIndex(headerLocator,columnName)+1;
@@ -77,5 +91,12 @@ public class TableUtils {
 		driver.findElement(By.xpath("//div[@role='rowgroup' and @class='oxd-table-body']/div["+rowID+"]/div/div["+columnID+"]/descendant::button[1]")).click();
 
 	}
-	
+	public void clickUsingMultipleRowKeysAndHeader(By headerLocator, String columnName,By rowsLocator, String uniqueValue1, String uniqueValue2 )
+	{
+		int columnID = getColumnIndex(headerLocator,columnName)+1;
+		int rowID = getRowIndexUsingUniqueValueSet(rowsLocator, uniqueValue1, uniqueValue2);
+
+		driver.findElement(By.xpath("//div[@role='rowgroup' and @class='oxd-table-body']/div["+rowID+"]/div/div["+columnID+"]/descendant::button[1]")).click();
+
+	}
 }

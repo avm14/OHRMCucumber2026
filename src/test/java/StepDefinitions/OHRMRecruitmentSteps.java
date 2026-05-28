@@ -62,10 +62,10 @@ public class OHRMRecruitmentSteps {
 		
 	}
 	@When("user clicks on actions button from records table for {string}")
-	public void clickActions(String value) throws InterruptedException
+	public void clickActions(String candidateName) throws InterruptedException
 	{
 		recruitment.clickRecruitmentTab();
-		recruitment.clickOnActions(value);
+		recruitment.clickOnActions(candidateName, "Application Initiated");
 	}
 	@And("shortlists the candidate")
 	public void shortlistCandidate() throws InterruptedException
@@ -104,7 +104,8 @@ public class OHRMRecruitmentSteps {
 		recruitment.clickOfferJob();
 		recruitment.addANote("offered L1");
 		recruitment.clickSave();
-		recruitment.clickHireBtn();recruitment.addANote("hired");
+		recruitment.clickHireBtn();
+		recruitment.addANote("hired");
 		recruitment.clickSave();
 		recruitment.checkHireMsg(status);
 		
