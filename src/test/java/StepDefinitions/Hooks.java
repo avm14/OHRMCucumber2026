@@ -36,7 +36,6 @@ public class Hooks {
     @After(order = 0)
     public void tearDown() {
         if (driver != null) {
-        	
             driver.quit();
         }
     }

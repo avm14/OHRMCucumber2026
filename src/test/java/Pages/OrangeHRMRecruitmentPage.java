@@ -49,10 +49,6 @@ public class OrangeHRMRecruitmentPage {
 	String interviewerSuggestionLoader = "//*[text()='Searching....']";
 	By interviewDateBox=By.xpath("//input[@placeholder='yyyy-dd-mm']");
 	By interviewTimeBox = By.xpath("//input[@placeholder='hh:mm']");
-	//By interviewTimeHour = By.xpath("//div[@class='oxd-time-hour-input']/input");
-	//By interviewTimeMinutes = By.xpath("//div[@class='oxd-time-minute-input']/input");
-	//By interviewTimeAM=By.xpath("//input[@value='AM']");
-	//By interviewTimePM=By.xpath("//input[@value='PM']");
 	By interviewPassBtn = By.xpath("//button[@class='oxd-button oxd-button--medium oxd-button--success']");
     By offerJobBtn = By.xpath("//button[text()=' Offer Job ']");
     By hireBtn = By.xpath("//button[text()=' Hire ']");
@@ -155,7 +151,6 @@ public class OrangeHRMRecruitmentPage {
 		driver.findElement(interviewerTB).clear();
 		driver.findElement(interviewerTB).click();
 		driver.findElement(interviewerTB).sendKeys("a");
-		//Thread.sleep(10000);
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 		WebElement loader = driver.findElement(By.xpath(interviewerSuggestionLoader));
 		wait.until(ExpectedConditions.invisibilityOf(loader));
