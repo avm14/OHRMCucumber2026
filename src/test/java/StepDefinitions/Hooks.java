@@ -2,10 +2,13 @@ package StepDefinitions;
 
 import java.time.Duration;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import io.cucumber.java.*;
 import io.github.bonigarcia.wdm.WebDriverManager;
@@ -21,7 +24,8 @@ public class Hooks {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
         driver.manage().window().maximize();
     }
-
+    By loadingSpinner = By.xpath("//*[@class='oxd-loading-spinner']");
+    
     @After(order=1)
     public void captureFailureSS(Scenario scenario)
     {
@@ -40,5 +44,18 @@ public class Hooks {
         }
     }
     
-    
+    //Commenting this block due to execution time delays
+//    @AfterStep
+//    public void captureSSForTestEvidence(Scenario scenario)
+//    {
+//    	if(driver.findElements(loadingSpinner).size() > 0)
+//    	{
+//    	WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(10));
+//    	wait.until(ExpectedConditions.invisibilityOf(driver.findElement(loadingSpinner)));
+//    	}
+//    	TakesScreenshot ts = (TakesScreenshot) driver;
+//		byte[] screenshot = ts.getScreenshotAs(OutputType.BYTES);
+//		scenario.attach(screenshot, "image/png", "Screenshot");
+//    	
+//    }
 }

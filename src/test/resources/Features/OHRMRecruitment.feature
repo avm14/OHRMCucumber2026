@@ -17,9 +17,11 @@ When user clicks on actions button from records table for "Payroll Administrator
 And shortlists the candidate
 And schedules an interview with "<date>" and "<time>"
 And marks the interview as pass
-Then user is able to offer job and application status changes to hired
+Then user is able to offer job and application status changes to "<status>"
 Examples:
-| date | time |
-| 2026-04-28 | 4:30 PM |
+
+| date | time | status |
+| 2026-04-28 | 4:30 PM | Status: Hired |
+
 
 #Scenario: user is able to schedule interview and reject a candidate 
