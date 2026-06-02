@@ -3,10 +3,10 @@ package Pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class OrangeHRMHomePage {
+public class OHRMHomePage {
 
 	WebDriver driver;
-	public OrangeHRMHomePage(WebDriver driver)
+	public OHRMHomePage(WebDriver driver)
 	{
 		this.driver = driver;
 	}
@@ -14,7 +14,7 @@ public class OrangeHRMHomePage {
 	By OHRM_admin_tab = By.xpath("//a[contains(@href,'viewAdminModule')]");
 	By ORHM_leave_tab = By.xpath("//a[contains(@href,'viewLeaveModule')]");
 	By OHRM_systemUsers_heading = By.xpath("//*[text()='System Users']");
-	By OHRM_leaveList_heading = By.xpath("//*[text()='Leave Lists']");
+	By OHRM_leaveList_heading = By.xpath("//*[text()='Leave List']");
 	By OHRM_Recruitment_tab = By.xpath("//a[contains(@href,'viewRecruitmentModule')]");
 	
 	

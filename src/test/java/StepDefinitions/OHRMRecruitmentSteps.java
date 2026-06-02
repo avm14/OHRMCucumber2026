@@ -5,9 +5,9 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import POJO.NewCandidateData;
-import Pages.OrangeHRMHomePage;
-import Pages.OrangeHRMLoginPage;
-import Pages.OrangeHRMRecruitmentPage;
+import Pages.OHRMHomePage;
+import Pages.OHRMLoginPage;
+import Pages.OHRMRecruitmentPage;
 import Utils.JavaUtils;
 import Utils.TestDataManager;
 import io.cucumber.java.en.*;
@@ -19,7 +19,7 @@ public class OHRMRecruitmentSteps {
 	
 	WebDriver driver;
 	
-	OrangeHRMRecruitmentPage recruitment;
+	OHRMRecruitmentPage recruitment;
 	
 	public OHRMRecruitmentSteps()
 	{
@@ -29,7 +29,7 @@ public class OHRMRecruitmentSteps {
 	@When("user clicks on recruitment tab")
 	public void user_clicks_on_recruitment_tab()
 	{
-		recruitment = new OrangeHRMRecruitmentPage(driver);
+		recruitment = new OHRMRecruitmentPage(driver);
 		recruitment.clickRecruitmentTab();
 	}
 
