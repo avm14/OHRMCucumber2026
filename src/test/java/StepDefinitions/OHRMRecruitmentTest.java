@@ -12,6 +12,6 @@ plugin = {"pretty","json:target/Reports/report.json",
 		   "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"
 		   }
 )
-public class OHRMRecruitmentTestRunner {
+public class OHRMRecruitmentTest {
 
 }
