@@ -8,13 +8,13 @@ import Pages.OrangeHRMLoginPage;
 import Utils.TestDataManager;
 import io.cucumber.java.en.*;
 
-public class OrangeHRMBackgroundSteps {
+public class OHRMBackgroundSteps {
 
 	WebDriver driver;
 	OrangeHRMLoginPage login;
 	OrangeHRMHomePage home;
 	
-	public OrangeHRMBackgroundSteps()
+	public OHRMBackgroundSteps()
 	{
 		this.driver = Hooks.driver;
 	}

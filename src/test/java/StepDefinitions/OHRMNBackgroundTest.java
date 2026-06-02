@@ -12,7 +12,7 @@ plugin = {"pretty","json:target/Reports/report.json",
 		   "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"
 		   }
 )
-public class OrangeHRMNBackgroundTest {
+public class OHRMNBackgroundTest {
 	
 
 }
