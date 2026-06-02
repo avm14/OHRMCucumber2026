@@ -3,10 +3,10 @@ package Pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class OrangeHRMLoginPage {
+public class OHRMLoginPage {
 	
 	WebDriver driver;
-	public OrangeHRMLoginPage(WebDriver driver)
+	public OHRMLoginPage(WebDriver driver)
 	{
 		this.driver = driver;
 	}

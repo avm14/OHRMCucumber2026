@@ -14,12 +14,12 @@ import java.time.Duration;
 import junit.framework.Assert;
 
 
-public class OrangeHRMRecruitmentPage {
+public class OHRMRecruitmentPage {
 
 	WebDriver driver;
 	
 	
-	public OrangeHRMRecruitmentPage(WebDriver driver)
+	public OHRMRecruitmentPage(WebDriver driver)
 	{
 		this.driver = driver;
 	}

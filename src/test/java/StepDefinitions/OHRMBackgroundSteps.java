@@ -3,18 +3,18 @@ package StepDefinitions;
 import org.openqa.selenium.WebDriver;
 
 import POJO.LoginData;
-import Pages.OrangeHRMHomePage;
-import Pages.OrangeHRMLoginPage;
+import Pages.OHRMHomePage;
+import Pages.OHRMLoginPage;
 import Utils.TestDataManager;
 import io.cucumber.java.en.*;
 
-public class OrangeHRMBackgroundSteps {
+public class OHRMBackgroundSteps {
 
 	WebDriver driver;
-	OrangeHRMLoginPage login;
-	OrangeHRMHomePage home;
+	OHRMLoginPage login;
+	OHRMHomePage home;
 	
-	public OrangeHRMBackgroundSteps()
+	public OHRMBackgroundSteps()
 	{
 		this.driver = Hooks.driver;
 	}
@@ -23,8 +23,8 @@ public class OrangeHRMBackgroundSteps {
 	public void user_is_on_ohrm_login_page() {
 	    
 		driver.get("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login");
-		login = new OrangeHRMLoginPage(driver);
-		home = new OrangeHRMHomePage(driver);
+		login = new OHRMLoginPage(driver);
+		home = new OHRMHomePage(driver);
 	}
 
 	@When("user enters {string} credentials")
