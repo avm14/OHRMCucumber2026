@@ -1,7 +1,14 @@
 package Pages;
 
+import static org.junit.Assert.assertTrue;
+
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+import junit.framework.Assert;
 
 public class OHRMHomePage {
 
@@ -14,7 +21,7 @@ public class OHRMHomePage {
 	By OHRM_admin_tab = By.xpath("//a[contains(@href,'viewAdminModule')]");
 	By ORHM_leave_tab = By.xpath("//a[contains(@href,'viewLeaveModule')]");
 	By OHRM_systemUsers_heading = By.xpath("//*[text()='System Users']");
-	By OHRM_leaveList_heading = By.xpath("//*[text()='Leave List']");
+	By OHRM_leaveList_heading = By.xpath("//*[text()='Leave Lists']");
 	By OHRM_Recruitment_tab = By.xpath("//a[contains(@href,'viewRecruitmentModule')]");
 	
 	
@@ -35,17 +42,23 @@ public class OHRMHomePage {
 	
 	public void verifysystemUsersDisplayed()
 	{
-		driver.findElement(OHRM_systemUsers_heading).isDisplayed();
+		List<WebElement> element = driver.findElements(OHRM_systemUsers_heading);
+		Assert.assertTrue(element.size()>0);;
+		
 	}
 	
 	public void verifyLeaveListDisplayed()
 	{
-		driver.findElement(OHRM_leaveList_heading).isDisplayed();
+		List<WebElement> element = driver.findElements(OHRM_leaveList_heading);
+		Assert.assertTrue(element.size()>0);
+	
 	}
 	
 	public void verifyHomepage()
 	{
-		driver.findElement(OHRM_admin_tab).isDisplayed();
+		List<WebElement> element = driver.findElements(OHRM_admin_tab);
+		Assert.assertTrue(element.size()>0);
+		
 	}
 }
 
