@@ -21,9 +21,15 @@ public class JavaUtils {
 	By calenderDropdownOptions = By.xpath("//li[contains(@class,'oxd-calendar-dropdown--option')]");
     By calenderDates = By.xpath("//div[contains(@class,'oxd-calendar-date-wrapper')]/div");
     By loadPageSpinner = By.xpath("//div[@class='oxd-loading-spinner']");
-	
+ 
 	WebDriver driver;
 	WebDriverWait wait;
+	
+	public JavaUtils(WebDriver driver)
+	{
+		this.driver = driver;
+		this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+	}
 	
 	public static String fetchCurrentDateYYYYDDMM()
 	{
@@ -39,7 +45,7 @@ public class JavaUtils {
 	}
 	
 	//This method helps select option by clicking. useful when select tag is not available
-	public  void selectByVisibleText(WebDriver driver,By DDArrow, By optionList, String option)
+	public  void selectByVisibleText(By DDArrow, By optionList, String option)
 	{
 		System.out.println("Searching for: "+option);
 		wait = new WebDriverWait(driver,Duration.ofSeconds(30));
@@ -77,16 +83,16 @@ public class JavaUtils {
     }
 	
 	//Internally uses select by visible text to find and click the correct dates
-	public  void selectDate(WebDriver driver,String dateStr) throws InterruptedException 
+	public  void selectDate(String dateStr) throws InterruptedException 
 	{
 
         LocalDate date = parseDate(dateStr);
 
         //select month
-        selectByVisibleText(driver,calenderMonth, calenderDropdownOptions, String.valueOf(date.getMonth()));
+        selectByVisibleText(calenderMonth, calenderDropdownOptions, String.valueOf(date.getMonth()));
 
         //select month
-        selectByVisibleText(driver, calenderYear,calenderDropdownOptions, String.valueOf(date.getYear()));
+        selectByVisibleText(calenderYear,calenderDropdownOptions, String.valueOf(date.getYear()));
 
         // select day
         
@@ -103,4 +109,29 @@ public class JavaUtils {
         }
        
     }	
+	
+	//Wrapper method for synchronization 
+	public void click(By locator)
+	{
+		    wait.until(ExpectedConditions.elementToBeClickable(locator));
+		    driver.findElement(locator).click();
+		   
+	}
+	public void type(By locator, String text)
+	{
+		 wait.until(ExpectedConditions.elementToBeClickable(locator));
+		driver.findElement(locator).sendKeys(text);
+	}
+	
+	public void clear(By locator)
+	{
+		    wait.until(ExpectedConditions.elementToBeClickable(locator));
+		    driver.findElement(locator).clear();
+		   
+	}
+	public void waitTillSpinnerDissappears()
+	{
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(loadPageSpinner));
+	}
 }
