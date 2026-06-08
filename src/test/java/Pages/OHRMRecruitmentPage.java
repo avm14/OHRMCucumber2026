@@ -8,6 +8,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.mongodb.util.Util;
+
 import Utils.JavaUtils;
 import Utils.TableUtils;
 import java.time.Duration;
@@ -17,11 +19,14 @@ import junit.framework.Assert;
 public class OHRMRecruitmentPage {
 
 	WebDriver driver;
-	
+	JavaUtils utils;
+	TableUtils table; 
 	
 	public OHRMRecruitmentPage(WebDriver driver)
 	{
 		this.driver = driver;
+		this.utils = new JavaUtils(driver);
+		this.table =  new TableUtils(driver);
 	}
 	
 	
@@ -57,22 +62,22 @@ public class OHRMRecruitmentPage {
 	
 	public void clickRecruitmentTab()
 	{
-		driver.findElement(recruitmentTab).click();
+		utils.click(recruitmentTab);	
 	}
 	
 	public void clickAddCandidateButton()
 	{
-		driver.findElement(addCandidate_btn).click();
+		utils.click(addCandidate_btn);
 	}
 	
 	public void enterFirstName(String firstName)
 	{
-		driver.findElement(newCandidateFirstName_tb).sendKeys(firstName);
+		utils.type(newCandidateFirstName_tb, firstName);
 	}
 	
 	public void enterLastName(String lastName)
 	{
-		driver.findElement(newCandidateLastName_tb).sendKeys(lastName);
+		utils.type(newCandidateLastName_tb, lastName);
 	}
 	
 	public void selectVacancy(String vacancy) throws InterruptedException
@@ -92,18 +97,18 @@ public class OHRMRecruitmentPage {
 	
 	public void enterEmailID(String email)
 	{
-		driver.findElement(newCandidateEmail_tb).sendKeys(email);
+		utils.type(newCandidateEmail_tb, email);
 	}
 	
 	public void clickSubmit()
 	{
-		driver.findElement(submit_btn).click();
+		utils.click(submit_btn);
 	}
 	
 	public String fetchDateOfCreation(String name)
 	{
-		TableUtils utils = new TableUtils(driver);
-		 String tableDate= utils.getCellValueUsingRowAndHeader(candidateRecordsTableHeader, "Date of Application",candidateRecordsTableRows, name );
+		
+		 String tableDate= table.getCellValueUsingRowAndHeader(candidateRecordsTableHeader, "Date of Application",candidateRecordsTableRows, name );
 		 
 		 return tableDate;
 		
@@ -111,46 +116,39 @@ public class OHRMRecruitmentPage {
 	
 	public void clickOnActions(String candidateName, String candidateStatus) throws InterruptedException
 	{
-		TableUtils table = new TableUtils(driver);
 		table.clickUsingMultipleRowKeysAndHeader(candidateRecordsTableHeader, "Actions",candidateRecordsTableRows, candidateName, candidateStatus);
 		
 	}
 	
 	public void clickShortList() throws InterruptedException
 	{
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-		wait.until(ExpectedConditions.visibilityOf(driver.findElement(candidateShortlistBtn)));
-		
-		driver.findElement(candidateShortlistBtn).click();
-	
+		utils.click(candidateShortlistBtn);
 	}
 	
 	public void addANote(String note)
 	{
-		driver.findElement(addNoteTextArea).sendKeys(note);
+		utils.type(addNoteTextArea, note);
 	}
 	
 	public void clickSave()
 	{
-		driver.findElement(submitBtn).click();
+		utils.click(submitBtn);
 	}
 	public void clickScheduleInterview()
 	{
-		driver.findElement(scheduleInterviewBtn).click();
+		utils.click(scheduleInterviewBtn);
 	}
 	public void enterInterviewTitle(String title)
 	{
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-		wait.until(ExpectedConditions.visibilityOf(driver.findElement(interviewTitleTB)));
-		driver.findElement(interviewTitleTB).clear();
-		driver.findElement(interviewTitleTB).sendKeys(title);
+		utils.clear(interviewTitleTB);
+		utils.type(interviewTitleTB,title);
 	}
 	
 	public void selectInterviewer() throws InterruptedException
 	{
-		driver.findElement(interviewerTB).clear();
-		driver.findElement(interviewerTB).click();
-		driver.findElement(interviewerTB).sendKeys("a");
+		utils.clear(interviewerTB);
+		utils.click(interviewerTB);
+		utils.type(interviewerTB, "a");
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 		WebElement loader = driver.findElement(By.xpath(interviewerSuggestionLoader));
 		wait.until(ExpectedConditions.invisibilityOf(loader));
@@ -159,9 +157,8 @@ public class OHRMRecruitmentPage {
 	}
 	public void selectInterviewDate(String dateInput) throws InterruptedException
 	{
-		JavaUtils utils = new JavaUtils();
-		driver.findElement(interviewDateBox).click();
-		utils.selectDate(driver, dateInput);
+		utils.click(interviewDateBox);
+		utils.selectDate( dateInput);
 		
 	}
 	
@@ -197,26 +194,25 @@ public class OHRMRecruitmentPage {
 	
 	public void selectInterviewTime(String time)
 	{
-		driver.findElement(interviewTimeBox).click();
-		driver.findElement(interviewTimeBox).clear();
-		driver.findElement(interviewTimeBox).sendKeys(time);
+		utils.click(interviewTimeBox);
+		utils.clear(interviewTimeBox);
+		utils.type(interviewTimeBox, time);
 		
 	}
 	
 	public void clickInterviewPass()
 	{
-		driver.findElement(interviewPassBtn).click();
+		utils.click(interviewPassBtn);
 	}
 	
 	public void clickOfferJob()
 	{
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(loadingSpinner));
-		driver.findElement(offerJobBtn).click();
+		utils.waitTillSpinnerDissappears();
+		utils.click(offerJobBtn);
 	}
 	public void clickHireBtn()
 	{
-		driver.findElement(hireBtn).click();
+		utils.click(hireBtn);
 	}
 	
 	public void checkHireMsg(String statusMsg)

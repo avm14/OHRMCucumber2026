@@ -3,12 +3,16 @@ package Pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import Utils.JavaUtils;
+
 public class OHRMLoginPage {
 	
 	WebDriver driver;
+	JavaUtils utils;
 	public OHRMLoginPage(WebDriver driver)
 	{
 		this.driver = driver;
+		this.utils = new JavaUtils(driver);
 	}
 
 	By OHRM_username_TB = By.xpath("//input[@name='username']");
@@ -18,11 +22,12 @@ public class OHRMLoginPage {
 	
 	public void enterCredentials(String username, String password)
 	{
-		driver.findElement(OHRM_username_TB).sendKeys(username);
-		driver.findElement(OHRM_password_TB).sendKeys(password);
+		utils.type(OHRM_username_TB, username);
+		utils.type(OHRM_password_TB, password);
+		
 	}
 	public void clickLogin()
 	{
-		driver.findElement(OHRM_login_Btn).click();
+		utils.click(OHRM_login_Btn);
 	}
 }

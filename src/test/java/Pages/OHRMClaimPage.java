@@ -19,13 +19,17 @@ import junit.framework.Assert;
 public class OHRMClaimPage {
 
 	WebDriver driver;
+	JavaUtils utils; 
+	TableUtils table;  
+	
 	public OHRMClaimPage(WebDriver driver)
 	{
 		this.driver = driver;	
+		 this.utils = new JavaUtils(driver);
+		 this.table  = new TableUtils(driver);
 	}
 	
-	TableUtils table;
-	JavaUtils utils = new JavaUtils();
+
 	
 	
 	By claimMenu = By.xpath("//a[contains(@href,'viewClaimModule')]");
@@ -70,13 +74,13 @@ public class OHRMClaimPage {
 	}
 	public void selectClaimTypeFromDropdown(String option)
 	{
-		JavaUtils utils = new JavaUtils();
-		utils.selectByVisibleText(driver,eventTypeDDArrow,eventOptions,option);
+	
+		utils.selectByVisibleText(eventTypeDDArrow, eventOptions, option);
 	}
 	
 	public void selectCurrencyFromDropdown(String option)
 	{
-		utils.selectByVisibleText(driver,currencyDDArrow,currencyOptions,option);
+		utils.selectByVisibleText(currencyDDArrow,currencyOptions,option);
 	}
 	
 	public void clickCreateClaim()
@@ -105,14 +109,14 @@ public class OHRMClaimPage {
 	}
 	public void selectExpenseType(String option)
 	{
-		utils.selectByVisibleText(driver,expenseTypeDDArrow,expenseTypeOptions,option);
+		utils.selectByVisibleText(expenseTypeDDArrow,expenseTypeOptions,option);
 	}
 	
 	public void selectExpenseDate(String dateInput) throws InterruptedException
 	{
-		JavaUtils utils = new JavaUtils();
+		
 		driver.findElement(expenseDate).click();
-		utils.selectDate(driver, dateInput);
+		utils.selectDate(dateInput);
 	}
 	
 	public void enterExpenseAmount(String amount)
@@ -130,7 +134,7 @@ public class OHRMClaimPage {
 	{
 		WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(30));
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(loadPageSpinner));
-		table = new TableUtils(driver);
+		
 		String recordDate= table.getCellValueUsingRowAndHeader(expenseTableColumnHeaders, "Date", expenseTableRows, eventType);
 		
 		Assert.assertEquals(recordDate, date);
