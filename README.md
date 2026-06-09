@@ -1,3 +1,8 @@
+**Planned Enhancements: June 2026**
+log4J utilization
+Base class creation to reduce dependency
+API integration
+
 **OHRM Cucumber Automation Framework**
 **Project Overview**
 
