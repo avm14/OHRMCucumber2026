@@ -1,59 +1,24 @@
-**Planned Enhancements: June 2026**
-log4J utilization
-Base class creation to reduce dependency
-API integration
+**Planned Enhancements: August 2026**
+log4J utilization.
+Base class creation for UI tests.
+Add new E2E scenarios for API suite.
 
 **OHRM Cucumber Automation Framework**
 **Project Overview**
 
-This project is a Selenium-based Automation Testing Framework developed for the OrangeHRM application using Java, Cucumber, and Maven.
+This is a hybrid Automation framework with UI and API suites. It uses cucumber test framework for a BDD approach and uses Selenium and Rest assured Java libraries.
 
 The framework follows industry-standard design patterns such as:
 
 Page Object Model (POM)
+API config and Data management utilities
 Reusable utility methods
 Externalized test data and configuration
 Cucumber BDD structure
 
-The objective of this framework is to create scalable, maintainable, and readable UI automation tests for web applications.
+The objective of this framework is to create scalable, maintainable, and readable UI + API automation tests for web applications.
 
-Tech Stack
-Tool / Technology	Purpose
-Java	Programming Language
-Selenium WebDriver	UI Automation
-Cucumber	BDD Framework
-TestNG	Test Execution
-Maven	Build Management
-Git & GitHub	Version Control
-Eclipse IDE	Development Environment
-Framework Features
-Cucumber BDD implementation
-Page Object Model (POM)
-Cross-browser support
-Reusable utility methods
-Screenshot capture on failure
-Maven-based project structure
-GitHub integrated version control
-Scalable and maintainable framework architecture
 
-**Project Structure**
-src/main/java
- ├── Pages
- ├── Utilities
- └── Base
-
-src/test/java
- ├── StepDefinitions
- ├── Runners
- └── Hooks
-
-src/test/resources
- ├── Features
- └── Config
-
-pom.xml
-README.md
-.gitignore
 
 **How to Run the Project**
 Prerequisites
