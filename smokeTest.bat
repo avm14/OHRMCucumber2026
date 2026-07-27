@@ -4,6 +4,6 @@ echo Executing Smoke Test...
 
 cd /d %~dp0
 
-mvn clean test -Dcucumber.filter.tags="@smoke"
+mvn clean test -Dcucumber.filter.tags="@smoke and @ui"
 
 pause

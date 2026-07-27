@@ -6,6 +6,7 @@ When user enters "Admin" credentials
 And clicks on login button
 Then user is navigated to the home page
 
+@ui
 Scenario Outline: user is able to add an expense and submit a new claim
 When user clicks on claim menu
 And user navigates to submit claim tab

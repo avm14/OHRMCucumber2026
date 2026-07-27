@@ -17,7 +17,7 @@ public class Hooks {
 
     public static WebDriver driver;
 
-    @Before
+    @Before("@ui")
     public void browserSetup() {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
@@ -26,7 +26,7 @@ public class Hooks {
     }
     By loadingSpinner = By.xpath("//*[@class='oxd-loading-spinner']");
     
-    @After(order=1)
+    @After(value="@ui",order=1)
     public void captureFailureSS(Scenario scenario)
     {
     	if(scenario.isFailed())
@@ -37,7 +37,7 @@ public class Hooks {
     	}
     }
     
-    @After(order = 0)
+    @After(value="@ui",order = 0)
     public void tearDown() {
         if (driver != null) {
             driver.quit();

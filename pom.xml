@@ -67,6 +67,19 @@
     <version>2.20.1</version>
 </dependency>
 
+<dependency>
+    <groupId>io.rest-assured</groupId>
+    <artifactId>rest-assured</artifactId>
+    <version>6.0.0</version>
+    <scope>test</scope>
+</dependency>
+
+ <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-picocontainer</artifactId>
+            <version>7.14.0</version>
+        </dependency>
+        
     </dependencies>
 <build>
     <plugins>
