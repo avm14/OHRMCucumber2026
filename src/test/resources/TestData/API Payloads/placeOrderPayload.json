@@ -1,0 +1,5 @@
+{
+  "orders": [
+    { "country": "Canada", "productOrderedId": "{{productId}}" }
+  ]
+}
