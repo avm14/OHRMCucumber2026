@@ -9,7 +9,7 @@ import Utils.APIClientActions;
 import Utils.APIScenarioContext;
 import io.cucumber.java.en.*;
 import io.restassured.response.Response;
-
+import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 
 public class APICommonSteps {
 
@@ -45,6 +45,11 @@ public class APICommonSteps {
         context.set(contextKey, lastResponse().jsonPath().get(jsonPath));
     }
     
+    @And("I set path param {string} as {string}")
+    public void setPathParam(String paramName, String contextKey) {
+        pendingPathParams.put(paramName, context.getString(contextKey));
+    }
+
 	// Path params are set on the line(s) before the request, then
     // consumed and cleared here so the next request starts clean.
     private Map<String, String> fetchPathParams() {
@@ -58,5 +63,26 @@ public class APICommonSteps {
         return (Response) context.get("lastResponse");
     }
     
+    @And("the response message should be {string}")
+    public void verifyMessage(String expected) {
+        Assert.assertEquals(expected, lastResponse().jsonPath().getString("message"));
+    }
+    
+    @Then("the response should match schema {string}")
+    public void the_response_should_match_schema(String schemaName) {
+    	lastResponse()
+            .then()
+            .assertThat()
+            .body(matchesJsonSchemaInClasspath("Schemas/" + schemaName + ".json"));
+    }
+    @When("I send a {string} request to {string} using auth token {string}")
+    public void sendWithAuth(String method, String endpointKey, String authKey) {
+        apiClient.sendRequest(endpointKey, null, true, authKey, fetchPathParams());
+    }
+    @When("I send a {string} request to {string} with payload {string} using auth token {string}")
+    public void sendWithAuthAndPaylod(String method, String endpointKey, String payloadKey, String authKey)
+    {
+    	apiClient.sendRequest(endpointKey, payloadKey, true, authKey, fetchPathParams());
+    }
     
 }
